@@ -1,8 +1,10 @@
 .text_editor_container {
   border: 1px solid grey;
   border-radius: 2px;
-  width: 500px;
   height: 220px;
+  display: flex;
+  align-items: center;
+  margin: 0.5rem;
 }
 
 .text_editor,
