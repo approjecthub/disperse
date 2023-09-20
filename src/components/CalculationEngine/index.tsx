@@ -155,6 +155,9 @@ const CalculationEngine = (): JSX.Element => {
   return (
     <div className={styles.calculation_engine_container}>
       <TextArea value={val} onChange={onChange} />
+      <p className={styles.calculation_engine_textarea_instruction}>
+        Separated By ',' or '' or '='
+      </p>
       {calculationEngineError && (
         <div className={styles.calculation_engine_error_container}>
           {calculationEngineError.errorType ===
