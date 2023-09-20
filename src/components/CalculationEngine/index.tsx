@@ -16,6 +16,7 @@ const CalculationEngine = (): JSX.Element => {
 
   const validAddressPattern = /^0x[a-fA-F0-9]{40}$/i;
   const validAmountPattern = /^[0-9]+$/;
+  const validAddressAmountSeparatorPattern = /[ ]+|[=,]/g;
 
   const onChange = (arg: string) => {
     setVal(arg);
@@ -23,11 +24,13 @@ const CalculationEngine = (): JSX.Element => {
   };
 
   const handleValidate = () => {
-    const allDatas: string[] = val.split(/[\n,=]/);
+    const allDatas: string[] = val.split("\n");
     const addressToLineNumberMap: { [key: string]: number[] } = {};
 
     for (let idx = 0; idx < allDatas.length; idx++) {
-      const currentLineDatas = allDatas[idx]?.split(" ");
+      const currentLineDatas = allDatas[idx]?.split(
+        validAddressAmountSeparatorPattern
+      );
 
       //validate current line data length
       if (!Array.isArray(currentLineDatas) || currentLineDatas.length !== 2) {
@@ -91,11 +94,11 @@ const CalculationEngine = (): JSX.Element => {
   const handleDuplicateErrors = (
     actionType: CALCULATION_DUPLICATION_ACTION_TYPE
   ) => {
-    const allDatas: string[] = val.split(/[\n,=]/);
+    const allDatas: string[] = val.split("\n");
     const addressToAmountMap: { [key: string]: number } = {};
 
     allDatas.forEach((data) => {
-      const currentLineDatas = data.split(" ");
+      const currentLineDatas = data.split(validAddressAmountSeparatorPattern);
       const address = currentLineDatas[0];
       const amount = +currentLineDatas[1];
 
